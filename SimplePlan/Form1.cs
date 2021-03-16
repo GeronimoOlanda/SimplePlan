@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace SimplePlan
         private float espessuraCaneta;
         private Color colorBorracha;
         private bool flagApagar = false; //controlar quando se deve apagar com a borracha
+        private Image imagemASalvar;
+        private Graphics graphicsImagemASalvar;
         public Form1()
         {
             
@@ -34,12 +37,17 @@ namespace SimplePlan
             CbExpressuraCaneta.Text = "12";//texto que irá aparecer na comboBox
             CbExpressuraCaneta.MaxDropDownItems = 10;//define o numero de itens a ser exibido em um comboBox
             CbExpressuraCaneta.IntegralHeight = false;// esse é necessario para que seja possivel definir a quantidade de itens do combobox
-
+            colorBorracha = panelPintura.BackColor; //especifica a cor padrao da borracha do painel
             //Graphics
             graphicsPainelPintura = panelPintura.CreateGraphics();// o graphics permite desenho sobre o controle
             espessuraCaneta = float.Parse(CbExpressuraCaneta.Text);//converte o texto da comboBox Expressura para o tipo float(numero real)
 
-            colorBorracha = panelPintura.BackColor; //especifica a cor padrao da borracha do painel
+           
+
+            imagemASalvar = new Bitmap(panelPintura.Width, panelPintura.Height); //imagem para salvar
+            graphicsImagemASalvar = Graphics.FromImage(imagemASalvar); // extraindo  graphics da imagem para salvar de forma a podermos desenhar nela
+            graphicsImagemASalvar.Clear(panelPintura.BackColor);//preenchemos com a cor de fundo do painel
+        
         }
 
         private void buttonCorCaneta_Click(object sender, EventArgs e)
@@ -71,12 +79,17 @@ namespace SimplePlan
                 {
                     //desenhamos uma elipse
                     graphicsPainelPintura.DrawEllipse(new Pen(buttonCorCaneta.BackColor, espessuraCaneta), new RectangleF(e.X, e.Y, espessuraCaneta, espessuraCaneta));
+                    graphicsImagemASalvar.DrawEllipse(new Pen(buttonCorCaneta.BackColor, espessuraCaneta), new RectangleF(e.X, e.Y, espessuraCaneta, espessuraCaneta));
                 }
                 else
                 {
                     //desenhamos uma elipse
                     graphicsPainelPintura.DrawRectangle(new Pen(colorBorracha, espessuraCaneta), new Rectangle(e.X, e.Y, (int)espessuraCaneta, (int)espessuraCaneta));
-                }
+                   
+                    //desenhamos  na imagem para salvar
+                    graphicsImagemASalvar.DrawRectangle(new Pen(colorBorracha, espessuraCaneta), new Rectangle(e.X, e.Y, (int)espessuraCaneta, (int)espessuraCaneta));
+                
+            }
                
             }
         }
@@ -87,6 +100,10 @@ namespace SimplePlan
             if(MessageBox.Show("Tem certeza disso? todo o desenho será excluido", "Apagar desenho", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 graphicsPainelPintura.Clear(Color.White); //limpando desenho e preenchendo o fundo de branco
+
+                imagemASalvar = new Bitmap(panelPintura.Width, panelPintura.Height); //imagem para salvar
+                graphicsImagemASalvar = Graphics.FromImage(imagemASalvar); // extraindo  graphics da imagem para salvar de forma a podermos desenhar nela
+                graphicsImagemASalvar.Clear(panelPintura.BackColor);//preenchemos com a cor de fundo do painel
             }
         }
 
@@ -108,7 +125,7 @@ namespace SimplePlan
                 if(colorDialog.ShowDialog() == DialogResult.OK)
                 {
                     colorBorracha = colorDialog.Color;//usuario seleciona a cor da borracha
-                }
+                 }
             }
             else
             {
@@ -121,6 +138,25 @@ namespace SimplePlan
                 {
                     flagApagar = false;//borracha nao esta apagando
                     buttonBorracha.BackColor = Color.Black;//setando a cor black
+                }
+            }
+        }
+
+        private void buttonSalvar_Click(object sender, EventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Portable Network Graphics|.png|Arquivo JPEG|.jpeg"; //atribuindo as estensoes
+           
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {   //definindo a extensao da imagem que iremos salvar
+                switch (saveFileDialog.FilterIndex)
+                { 
+                    case 1:
+                        imagemASalvar.Save(saveFileDialog.FileName, ImageFormat.Png);
+                        break;
+                    case 2:
+                        imagemASalvar.Save(saveFileDialog.FileName, ImageFormat.Jpeg);
+                        break;
                 }
             }
         }
