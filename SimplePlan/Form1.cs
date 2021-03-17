@@ -26,9 +26,10 @@ namespace SimplePlan
             InitializeComponent();
             // as propriedades abaixo só funciona quando colocamos os botoes em modo flat
             //setada flat
-            buttonBorracha.FlatAppearance.MouseOverBackColor = Color.DarkSlateGray;
-            buttonCorCaneta.FlatAppearance.MouseOverBackColor = Color.DarkSlateGray;
-            buttonSalvar.FlatAppearance.MouseOverBackColor = Color.DarkSlateGray;
+            buttonBorracha.FlatAppearance.MouseOverBackColor = Color.DarkGray;
+            buttonCorCaneta.FlatAppearance.MouseOverBackColor = Color.DarkGray;
+            buttonSalvar.FlatAppearance.MouseOverBackColor = Color.DarkGray;
+            buttonLimpar.FlatAppearance.MouseOverBackColor = Color.DarkGray;
 
             for (int i = 2; i <= 100; i += 2)//espessura da caneta de 2 em 2
             {

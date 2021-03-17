@@ -61,32 +61,44 @@ namespace SimplePlan
             // 
             // buttonLimpar
             // 
+            this.buttonLimpar.BackColor = System.Drawing.Color.White;
+            this.buttonLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLimpar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLimpar.ForeColor = System.Drawing.Color.Black;
             this.buttonLimpar.Location = new System.Drawing.Point(570, 23);
             this.buttonLimpar.Name = "buttonLimpar";
             this.buttonLimpar.Size = new System.Drawing.Size(95, 40);
             this.buttonLimpar.TabIndex = 7;
             this.buttonLimpar.Text = "Limpar";
-            this.buttonLimpar.UseVisualStyleBackColor = true;
+            this.buttonLimpar.UseVisualStyleBackColor = false;
             this.buttonLimpar.Click += new System.EventHandler(this.buttonLimpar_Click);
             // 
             // buttonSalvar
             // 
+            this.buttonSalvar.BackColor = System.Drawing.Color.White;
+            this.buttonSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSalvar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSalvar.ForeColor = System.Drawing.Color.Black;
             this.buttonSalvar.Location = new System.Drawing.Point(695, 25);
             this.buttonSalvar.Name = "buttonSalvar";
             this.buttonSalvar.Size = new System.Drawing.Size(76, 38);
             this.buttonSalvar.TabIndex = 6;
             this.buttonSalvar.Text = "Salvar";
-            this.buttonSalvar.UseVisualStyleBackColor = true;
+            this.buttonSalvar.UseVisualStyleBackColor = false;
             this.buttonSalvar.Click += new System.EventHandler(this.buttonSalvar_Click);
             // 
             // buttonBorracha
             // 
+            this.buttonBorracha.BackColor = System.Drawing.Color.White;
+            this.buttonBorracha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBorracha.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBorracha.ForeColor = System.Drawing.Color.Black;
             this.buttonBorracha.Location = new System.Drawing.Point(455, 23);
             this.buttonBorracha.Name = "buttonBorracha";
             this.buttonBorracha.Size = new System.Drawing.Size(87, 40);
             this.buttonBorracha.TabIndex = 4;
             this.buttonBorracha.Text = "Borracha";
-            this.buttonBorracha.UseVisualStyleBackColor = true;
+            this.buttonBorracha.UseVisualStyleBackColor = false;
             this.buttonBorracha.Click += new System.EventHandler(this.buttonBorracha_Click);
             this.buttonBorracha.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonBorracha_MouseDown);
             // 
